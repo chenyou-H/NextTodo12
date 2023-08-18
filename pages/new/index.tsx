@@ -1,43 +1,39 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 // import Router from 'next/router'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 export default function New() {
-  const router = useRouter()
+  const router = useRouter();
   const [task, setTask] = useState();
 
   const handleInputChange = (e) => {
     setTask(e.target.value);
-  }
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const url = '../api/form'
+    e.preventDefault();
+    const url = '../api/form';
     const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      credentials: "same-origin", // include, *same-origin, omit
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      credentials: 'same-origin', // include, *same-origin, omit
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      redirect: 'follow', // manual, *follow, error
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify({ title: task }), // body data type must match "Content-Type" header
     });
-    router.push("/")
-  }
+    router.push('/');
+  };
 
   return (
     <>
       <header className="flex justify-between items-center mb-4">
         <h1 className="text-2xl">New</h1>
       </header>
-      <form
-        onSubmit={handleSubmit}
-        // action='../api/form'
-        // method='post'
-        className="flex gap-2 flex-col">
+      <form onSubmit={handleSubmit} className="flex gap-2 flex-col">
         <input
           type="text"
           name="title"
